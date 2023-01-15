@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmployeeComponent } from './employee.component';
 import { PageViewEmployeeComponent } from './pages/page-view-employee/page-view-employee.component';
 import { PageDetailEmployeeComponent } from './pages/page-detail-employee/page-detail-employee.component';
 import { EmployeeRoutingModule } from './employee-routing.module';
@@ -13,7 +12,6 @@ import { DetailEmployeeService } from './services/detail-employee.service';
 
 @NgModule({
   declarations: [
-    EmployeeComponent,
     PageViewEmployeeComponent,
     PageDetailEmployeeComponent,
     SpinnerComponent,

@@ -155,7 +155,7 @@ export class PageViewEmployeeComponent implements OnInit {
       this.service.deleteEmployee(this.objEmployee.id).subscribe(
         (data) => {
           this.isBtnDisabled = false;
-          this.toastr.success(
+          this.toastr.error(
             'Deleting user: ' + this.objEmployee?.username,
             'Success',
             {
