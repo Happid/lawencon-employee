@@ -32,12 +32,23 @@ export class PageDetailEmployeeComponent implements OnInit {
   getDetail(idUser: number) {
     this.service.detailEmployee(idUser).subscribe(
       (data) => {
-        this.employee = data;
-        this.employee.basicSalary = 5500000;
-        this.employee.status = 'On';
+        // krn data fake api tidak bisa di edit sesuai keinginan, please check dokumentasi
+        // this.employee = data;
+
+        // menyesuaikan data sesuai tes teknikal
+        this.employee.id = data.id;
+        this.employee.username = data.username;
+        this.employee.firstName = data.firstName;
+        this.employee.lastName = data.lastName;
+        this.employee.email = data.email;
+        this.employee.birthDate = data.birthDate + 'T00:00';
         this.employee.group = 'Group A';
+        this.employee.status = 'On';
+        this.employee.basicSalary = 5500000;
         this.employee.description =
           'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque eum';
+        this.dateInput(this.employee.birthDate);
+        this.formatCurrency(null, this.employee.basicSalary);
         console.log(this.employee);
         this.loadingSpinner = false;
       },
@@ -84,9 +95,16 @@ export class PageDetailEmployeeComponent implements OnInit {
     this.router.navigate(['/employee']);
   }
 
-  formatCurrency(event: any) {
-    const value = event.target.value;
-    let number_string = value.replace(/[^,\d]/g, '').toString();
+  formatCurrency(event: any, model: any) {
+    let value = '';
+    let number_string = '';
+    if (model !== null) {
+      value = model;
+      number_string = model.toString();
+    } else {
+      value = event.target.value;
+      number_string = value.replace(/[^,\d]/g, '').toString();
+    }
     let split = number_string.split(',');
     let sisa = split[0].length % 3;
     let rupiah = split[0].substr(0, sisa);
