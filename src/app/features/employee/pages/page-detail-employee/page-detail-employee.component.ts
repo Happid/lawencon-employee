@@ -32,8 +32,13 @@ export class PageDetailEmployeeComponent implements OnInit {
   getDetail(idUser: number) {
     this.service.detailEmployee(idUser).subscribe(
       (data) => {
-        console.log(data);
         this.employee = data;
+        this.employee.basicSalary = 5500000;
+        this.employee.status = 'On';
+        this.employee.group = 'Group A';
+        this.employee.description =
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque eum';
+        console.log(this.employee);
         this.loadingSpinner = false;
       },
       (error: HttpErrorResponse) => {
