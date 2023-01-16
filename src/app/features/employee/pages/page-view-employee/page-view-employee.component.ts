@@ -73,6 +73,7 @@ export class PageViewEmployeeComponent implements OnInit {
   searchEmployee() {
     this.loadingSpinner = true;
     this.tblParam.limit = 10;
+    this.tblParam.skip = 0;
     localStorage.setItem('searchValue', this.tblParam.search);
     this.service
       .searchEmployee(
@@ -83,6 +84,15 @@ export class PageViewEmployeeComponent implements OnInit {
       .subscribe(
         (data) => {
           this.lstEmployee = data.users;
+
+          // karena dummy json tidak ada key nya maka dibuat manual
+          this.lstEmployee.map((res: any, i: number) => {
+            this.lstEmployee[i]['basicSalary'] = 5500000;
+            this.lstEmployee[i]['status'] = 'On';
+            this.lstEmployee[i]['group'] = 'Group A';
+            this.lstEmployee[i]['description'] =
+              'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque eum';
+          });
 
           this.tblParam.limit = data.limit;
           this.tblParam.skip = data.skip;
